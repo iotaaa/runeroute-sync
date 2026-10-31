@@ -30,9 +30,9 @@ dependencies {
 group = 'com.runeroute'
 version = '0.1.0'
 
-// The website the plugin talks to by default. Build a hosted version with:
-//   ./gradlew shadowJar -PsiteUrl=https://runeroute.app
-def siteUrl = (project.findProperty('siteUrl') ?: 'http://localhost:3000').toString()
+// The website the plugin talks to by default. Point a build at a local site with:
+//   ./gradlew run -PsiteUrl=http://localhost:3000
+def siteUrl = (project.findProperty('siteUrl') ?: 'https://www.runeroute.app').toString()
 
 processResources {
 	inputs.property('siteUrl', siteUrl)

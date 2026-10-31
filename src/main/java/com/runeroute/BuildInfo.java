@@ -6,7 +6,7 @@ import java.util.Properties;
 /** Values baked in at build time (see processResources in build.gradle). */
 final class BuildInfo
 {
-	static final String DEFAULT_URL = load("defaultUrl", "https://runeroute.app");
+	static final String DEFAULT_URL = load("defaultUrl", "https://www.runeroute.app");
 
 	private BuildInfo()
 	{

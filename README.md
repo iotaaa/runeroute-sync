@@ -23,14 +23,14 @@ It sends while you're logged in, every 60 seconds and a few seconds after a kill
 
 | Setting | Default | What it does |
 |---|---|---|
-| Website URL | set at build time (`-PsiteUrl`), `http://localhost:3000` by default | Where the site is running |
+| Website URL | `https://www.runeroute.app` (change with `-PsiteUrl` at build time) | Where the site is running |
 | Sync every | 60 s | How often to send while logged in |
 | Send bank | on | Sends your bank after you open it |
 | Send location | off | Sends your current tile |
 
 ## Development
 
-The website lives in its own repo, [runeroute](https://github.com/iotaaa/runeroute). Run it locally first (see its README), then:
+The website lives in its own repo, [runeroute](https://github.com/iotaaa/runeroute).
 
 Needs a JDK (11 or newer; 17 or 21 recommended). The Gradle wrapper downloads Gradle and RuneLite itself.
 
@@ -38,7 +38,7 @@ Needs a JDK (11 or newer; 17 or 21 recommended). The Gradle wrapper downloads Gr
 ./gradlew run
 ```
 
-That starts a developer copy of RuneLite with **Rune Route** already loaded. Log in and your account appears on the website within about a minute. IntelliJ also works: open this folder and run `RuneRoutePluginTest`.
+That starts a developer copy of RuneLite with **Rune Route** already loaded, syncing to www.runeroute.app. Log in and your account appears on the website within about a minute. To test against a local copy of the site instead, run `./gradlew run -PsiteUrl=http://localhost:3000`. IntelliJ also works: open this folder and run `RuneRoutePluginTest`.
 
 To hand a test copy to someone before the plugin is on the Plugin Hub, `./gradlew shadowJar -PsiteUrl=https://your-site` makes a single file in `build/libs/` with RuneLite and the plugin built in. They need Java 17 or newer and start it with `java -ea -jar rune-route-0.1.0-all.jar --developer-mode` (`--developer-mode` turns on the Jagex Accounts login in the sidebar).
 
@@ -49,7 +49,7 @@ If you use a Jagex Account, a development client needs a one-time setup to log i
 Once it's on the Plugin Hub, players install it inside normal RuneLite with a search and a click: no download, no Java, no settings. The official steps are in the [plugin-hub README](https://github.com/runelite/plugin-hub).
 
 1. **Host the website first.** Plugin Hub players need a real address, not localhost.
-2. **The hosted address is already the plugin's default.** The Plugin Hub builds plugins with its own standard `build.gradle`, so the `-PsiteUrl` build option doesn't apply there. Instead the plugin falls back to `https://runeroute.app` (in `BuildInfo.java`). Local builds still point at `http://localhost:3000`.
+2. **The hosted address is already the plugin's default.** The Plugin Hub builds plugins with its own standard `build.gradle`, so the `-PsiteUrl` build option doesn't apply there. Instead the plugin falls back to `https://www.runeroute.app` (in `BuildInfo.java`). Local builds use the same address unless you pass `-PsiteUrl=http://localhost:3000`.
 3. **This repo is already laid out for it:** `runelite-plugin.properties`, `build.gradle` and `LICENSE` sit at the top. Optionally add an `icon.png` no larger than 48x72 px.
 4. **Submit it.** Fork [runelite/plugin-hub](https://github.com/runelite/plugin-hub), add a file `plugins/runeroute-sync` like the one below, and open a pull request. Plugins that send data to an outside server carry a `warning` line, which RuneLite shows before anyone installs it.
    ```
