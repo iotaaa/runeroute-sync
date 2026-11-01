@@ -1,60 +1,73 @@
 # Rune Route Sync
 
-Syncs your account to [runeroute.app](https://runeroute.app), which suggests what to do next: skill unlocks, quests you can start and bosses you're ready for.
+Rune Route Sync links your account to [runeroute.app](https://www.runeroute.app), a free companion site that tells you what to do next in Old School RuneScape.
 
-Install it from the Plugin Hub and log in. Your stats, quests, kill counts and bank are sent about once a minute while you play, and your page appears at runeroute.app under your name. There's nothing to sign up for.
+## What you get on runeroute.app
 
-- Only your own account's data is sent
-- Turn off **Send bank** in the plugin settings if you'd rather not share it
+- **What next:** skill goals, quests you can start or are close to, and account milestones, ranked for your account
+- **Overview:** your levels, total XP, quest points and an in-game style skills tab
+- **Recommended bosses:** bosses your stats and quests are ready for, and what you're missing for the next ones
+- **Bank:** a searchable copy of your bank, sortable by Grand Exchange value
+- **Collection log:** every tab and page, with what you have and what's missing
+- **Armoury:** a public page with your character in 3D, your gear and your progress, to share with friends at `runeroute.app/armoury/<your name>`
 
-## What the plugin sends
+## Getting started
 
-- RuneLite's account hash (an ID that isn't shown publicly) and a random secret made by the plugin
-- Username, combat level, world, quest points
-- Every skill: real level, boosted level, XP
-- Every quest's state (refreshed on login, after finishing a quest, and every 5 minutes)
-- Boss and minigame kill counts, read from chat messages like "Your Zulrah kill count is: 12"
-- Inventory and worn equipment
-- Bank contents (after you open the bank)
+1. Install **Rune Route Sync** from the Plugin Hub and accept the warning
+2. Log in to the game
+3. Within about a minute, open [runeroute.app](https://www.runeroute.app) and pick your account
 
-It sends while you're logged in, every 60 seconds and a few seconds after a kill count message or opening your bank. The secret is stored in RuneLite's per-account settings, so it survives restarts and follows you between computers if you're signed in to a RuneLite account.
+There's nothing to sign up for. Your page stays up to date while you play.
 
-## Settings
+## What it sends
+
+Only **your** account is sent, never other players. While you're logged in, the plugin syncs about once a minute, and sooner after things like a kill-count message, opening the bank or changing gear:
+
+- Name, combat level, world, account type (normal or ironman mode) and quest points
+- Skill levels and XP
+- Quest progress
+- Boss and minigame kill counts
+- Worn gear and inventory, plus a picture and 3D model of your character when your look changes
+- Bank contents, after you open the bank
+- Collection log totals, and each page you open
+- Your current location and what you're doing (idle, skilling, in combat, banking and so on)
+
+To make sure only your client can update your page, it also sends RuneLite's account hash (never shown publicly) and a random key stored in your RuneLite settings.
+
+RuneLite shows a warning on install because this data goes to runeroute.app, which isn't run or checked by the RuneLite developers.
+
+## Turning things off
+
+Every kind of data has its own switch in the plugin's settings, under **Data to send**. Turning one off stops sending it **and deletes it from the website**. Your page then shows that section as turned off.
+
+| Setting | Default | What it sends |
+|---|---|---|
+| Skills | On | Levels and XP |
+| Quests | On | Quest progress and quest points |
+| Boss kill counts | On | Kill counts shown in chat |
+| Gear | On | Equipped items, character picture and 3D model |
+| Inventory | On | What you're carrying |
+| Bank | On | Bank contents after you open it |
+| Location | On | Your current tile |
+| Activity | On | What you're doing right now |
+| Online status | On | Online or last seen. Turning this off also hides Activity |
+| Collection log | On | Log totals and pages you've opened |
+
+Other settings:
 
 | Setting | Default | What it does |
 |---|---|---|
-| Website URL | `https://www.runeroute.app` (change with `-PsiteUrl` at build time) | Where the site is running |
-| Sync every | 60 s | How often to send while logged in |
-| Send bank | on | Sends your bank after you open it |
-| Send location | off | Sends your current tile |
+| Sync every | 60 s | How often a full update is sent while you're logged in |
+| Website URL | `https://www.runeroute.app` | Leave this as it is unless you run your own copy of the site |
 
-## Development
+## Help and source
 
-The website lives in its own repo, [runeroute](https://github.com/iotaaa/runeroute).
+- Website: [runeroute.app](https://www.runeroute.app)
+- Plugin source: [iotaaa/runeroute-sync](https://github.com/iotaaa/runeroute-sync)
+- Problems or ideas: [open an issue](https://github.com/iotaaa/runeroute-sync/issues)
 
-Needs a JDK (11 or newer; 17 or 21 recommended). The Gradle wrapper downloads Gradle and RuneLite itself.
+Rune Route is a fan project and isn't affiliated with Jagex. Item, skill and boss images come from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki).
 
-```bash
-./gradlew run
-```
+## License
 
-That starts a developer copy of RuneLite with **Rune Route** already loaded, syncing to www.runeroute.app. Log in and your account appears on the website within about a minute. To test against a local copy of the site instead, run `./gradlew run -PsiteUrl=http://localhost:3000`. IntelliJ also works: open this folder and run `RuneRoutePluginTest`.
-
-To hand a test copy to someone before the plugin is on the Plugin Hub, `./gradlew shadowJar -PsiteUrl=https://your-site` makes a single file in `build/libs/` with RuneLite and the plugin built in. They need Java 17 or newer and start it with `java -ea -jar rune-route-0.1.0-all.jar --developer-mode` (`--developer-mode` turns on the Jagex Accounts login in the sidebar).
-
-If you use a Jagex Account, a development client needs a one-time setup to log in. Follow the "Using Jagex Accounts" guide on the RuneLite GitHub wiki.
-
-## Getting onto the Plugin Hub
-
-Once it's on the Plugin Hub, players install it inside normal RuneLite with a search and a click: no download, no Java, no settings. The official steps are in the [plugin-hub README](https://github.com/runelite/plugin-hub).
-
-1. **Host the website first.** Plugin Hub players need a real address, not localhost.
-2. **The hosted address is already the plugin's default.** The Plugin Hub builds plugins with its own standard `build.gradle`, so the `-PsiteUrl` build option doesn't apply there. Instead the plugin falls back to `https://www.runeroute.app` (in `BuildInfo.java`). Local builds use the same address unless you pass `-PsiteUrl=http://localhost:3000`.
-3. **This repo is already laid out for it:** `runelite-plugin.properties`, `build.gradle` and `LICENSE` sit at the top. Optionally add an `icon.png` no larger than 48x72 px.
-4. **Submit it.** Fork [runelite/plugin-hub](https://github.com/runelite/plugin-hub), add a file `plugins/runeroute-sync` like the one below, and open a pull request. Plugins that send data to an outside server carry a `warning` line, which RuneLite shows before anyone installs it.
-   ```
-   repository=https://github.com/iotaaa/runeroute-sync.git
-   commit=<full 40-character commit hash>
-   warning=This plugin submits your IP address and account data to a server not controlled or verified by the RuneLite developers.
-   ```
-5. **Wait for review.** An automatic build runs on the pull request, then RuneLite's developers check the plugin isn't malicious, follows Jagex's third-party client rules and isn't a rejected feature. Sending only your own account's data is fine; collecting data about other players is not allowed. Each later update is a pull request that changes `commit=`.
+BSD 2-Clause. See [LICENSE](LICENSE).
