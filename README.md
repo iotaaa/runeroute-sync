@@ -1,73 +1,35 @@
 # Rune Route Sync
 
-Rune Route Sync links your account to [runeroute.app](https://www.runeroute.app), a free companion site that tells you what to do next in Old School RuneScape.
+Links your account to [runeroute.app](https://www.runeroute.app), a free companion site that tells you what to train, quest or kill next.
 
-## What you get on runeroute.app
+Install the plugin and log in. Within a minute your page appears on the site with your stats, quests, bank and collection log, and it stays up to date while you play. There's nothing to sign up for.
 
-- **What next:** skill goals, quests you can start or are close to, and account milestones, ranked for your account
-- **Overview:** your levels, total XP, quest points and an in-game style skills tab
-- **Recommended bosses:** bosses your stats and quests are ready for, and what you're missing for the next ones
-- **Bank:** a searchable copy of your bank, sortable by Grand Exchange value
-- **Collection log:** every tab and page, with what you have and what's missing
-- **Armoury:** a public page with your character in 3D, your gear and your progress, to share with friends at `runeroute.app/armoury/<your name>`
+- Ranked suggestions for what to do next, based on your actual account
+- Your character in 3D on a public armoury page you can share
+- Works for standard accounts and every ironman mode
 
-## Getting started
+<br>
 
-1. Install **Rune Route Sync** from the Plugin Hub and accept the warning
-2. Log in to the game
-3. Within about a minute, open [runeroute.app](https://www.runeroute.app) and pick your account
+<p align="center">
+  <img src="https://raw.githubusercontent.com/iotaaa/runeroute-sync/main/images/overview.png" alt="Rune Route overview: Overview, Armoury, What next, Collection log and Bank pages">
+</p>
 
-There's nothing to sign up for. Your page stays up to date while you play.
+<h2 align="center">Features</h2>
 
-## What it sends
+<br>
 
-Only **your** account is sent, never other players. While you're logged in, the plugin syncs about once a minute, and sooner after things like a kill-count message, opening the bank or changing gear:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/iotaaa/runeroute-sync/main/images/features.png" alt="Features: What next, Your account, Armoury, and Your data, your choice, in detail">
+</p>
 
-- Name, combat level, world, account type (normal or ironman mode) and quest points
-- Skill levels and XP
-- Quest progress
-- Boss and minigame kill counts
-- Worn gear and inventory, plus a picture and 3D model of your character when your look changes
-- Bank contents, after you open the bank
-- Collection log totals, and each page you open
-- Your current location and what you're doing (idle, skilling, in combat, banking and so on)
+<h2 align="center">Your data</h2>
 
-To make sure only your client can update your page, it also sends RuneLite's account hash (never shown publicly) and a random key stored in your RuneLite settings.
+Only **your** account is sent to runeroute.app, never other players. RuneLite shows a warning on install because the site isn't run by the RuneLite developers.
 
-RuneLite shows a warning on install because this data goes to runeroute.app, which isn't run or checked by the RuneLite developers.
+While you're logged in, the plugin syncs about once a minute: your name, account type, levels and XP, quests, kill counts, gear and inventory, bank (after you open it), collection log, location and what you're doing, plus a picture and 3D model of your character when your look changes.
 
-## Turning things off
+Every kind of data has its own switch in the plugin settings under **Data to send**. Turning one off stops sending it and deletes it from the website.
 
-Every kind of data has its own switch in the plugin's settings, under **Data to send**. Turning one off stops sending it **and deletes it from the website**. Your page then shows that section as turned off.
+<h2 align="center">Author</h2>
 
-| Setting | Default | What it sends |
-|---|---|---|
-| Skills | On | Levels and XP |
-| Quests | On | Quest progress and quest points |
-| Boss kill counts | On | Kill counts shown in chat |
-| Gear | On | Equipped items, character picture and 3D model |
-| Inventory | On | What you're carrying |
-| Bank | On | Bank contents after you open it |
-| Location | On | Your current tile |
-| Activity | On | What you're doing right now |
-| Online status | On | Online or last seen. Turning this off also hides Activity |
-| Collection log | On | Log totals and pages you've opened |
-
-Other settings:
-
-| Setting | Default | What it does |
-|---|---|---|
-| Sync every | 60 s | How often a full update is sent while you're logged in |
-| Website URL | `https://www.runeroute.app` | Leave this as it is unless you run your own copy of the site |
-
-## Help and source
-
-- Website: [runeroute.app](https://www.runeroute.app)
-- Plugin source: [iotaaa/runeroute-sync](https://github.com/iotaaa/runeroute-sync)
-- Problems or ideas: [open an issue](https://github.com/iotaaa/runeroute-sync/issues)
-
-Rune Route is a fan project and isn't affiliated with Jagex. Item, skill and boss images come from the [Old School RuneScape Wiki](https://oldschool.runescape.wiki).
-
-## License
-
-BSD 2-Clause. See [LICENSE](LICENSE).
+<p align="center">You can find my socials at <a href="https://www.iotaaa.co.uk/">iotaaa.co.uk</a>.</p>
