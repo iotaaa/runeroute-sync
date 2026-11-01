@@ -57,7 +57,11 @@ tasks.register('run', JavaExec) {
 tasks.register('shadowJar', Jar) {
 	dependsOn configurations.testRuntimeClasspath
 	manifest {
-		attributes('Main-Class': pluginMainClass, 'Multi-Release': true, 'Add-Exports': 'java.desktop/com.apple.eawt')
+		attributes(
+			'Main-Class': pluginMainClass,
+			'Multi-Release': true,
+			'Add-Exports': 'java.desktop/com.apple.eawt'
+		)
 	}
 
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
